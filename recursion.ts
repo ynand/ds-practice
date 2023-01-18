@@ -100,4 +100,90 @@ function palindrome(str,i){
   return palindrome(str,i+1)
 }
 var str ='maddam';
-console.log(palindrome(str,0))
+//console.log(palindrome(str,0))
+
+
+//Fibonacci -- Time comp : O(2^n), Space comp : O(n)
+function fibonacci(n){
+  if(n<=1) return n
+  var last = fibonacci(n-1);
+  var secondLast = fibonacci(n-2);
+  return last+secondLast;
+}
+//console.log(fibonacci(4));
+
+//Array Subsequence --Time comp : O(2^n * n(printing array?)), Space comp : O(n)
+
+function subsequence(ans,n){
+  if(n>arr.length-1){
+    console.log(ans);
+    return
+  }
+  ans.push(arr[n]);
+  subsequence(ans,n+1);
+  ans.pop(arr[n]);
+  subsequence(ans,n+1);
+}
+//arr =[3,1,2];
+//subsequence([],0)
+
+// printing all subsequence whose sum is K ----Time comp : O(2^n * n(printing array?)), Space comp : O(n)
+
+function subsequenceSum(ans,n,sum){
+  if(n>arr.length-1){
+    if(sum==k)
+    console.log(ans);
+    return
+  }
+  ans.push(arr[n]);
+  sum += arr[n];
+  subsequenceSum(ans,n+1,sum);
+  ans.pop(arr[n]);
+  sum -= arr[n];
+  subsequenceSum(ans,n+1,sum);
+}
+// var k=4;
+// var arr =[3,1,2,2,4];
+// subsequenceSum([],0,0)
+
+
+// printing any one subsequence whose sum is K ----Time comp : O(2^n * n(printing array?)), Space comp : O(n)
+
+function oneSubsequenceSum(ans,n,sum){
+  if(n>arr.length-1){
+    if(sum==k){
+    console.log(ans);
+    return true;
+    }
+    return false;
+  }
+  ans.push(arr[n]);
+  sum += arr[n];
+  if(oneSubsequenceSum(ans,n+1,sum)==true) return true;
+  ans.pop(arr[n]);
+  sum -= arr[n];
+  if(oneSubsequenceSum(ans,n+1,sum)==true) return true;
+  return false;
+}
+// var k=4;
+// var arr =[3,1,2,2,4];
+// oneSubsequenceSum([],0,0)
+
+// printing count of subsequence whose sum is K ----Time comp : O(2* n(printing array?)), Space comp : O(n)
+
+function CountSubsequenceSum(n,sum){
+  if(n>arr.length-1){
+    if(sum==k){
+    return 1;
+    }
+    return 0;
+  }
+  sum += arr[n];
+  var l = CountSubsequenceSum(n+1,sum);
+  sum -= arr[n];
+  var r = CountSubsequenceSum(n+1,sum);
+  return l+r;
+}
+var k=4;
+var arr =[3,1,2,2,4];
+console.log(CountSubsequenceSum([],0))
